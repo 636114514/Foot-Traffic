@@ -12,6 +12,7 @@
 // Global counter variable
 static int counter = 0;
 // Global mean RSSI values and standard deviation 
+// Depending on the distance and different enviorment, these values should be adjusted after test
 static int8_t avg_mean = -50.;
 static int8_t std_dev = 4.;
 
