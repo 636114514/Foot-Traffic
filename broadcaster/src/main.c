@@ -45,10 +45,15 @@ int main(void) {
     k_msleep(10); // Sleep for 100 milliseconds 
 
     printk("Sending advertising data: 0x%02X\n", mfg_data[2]);
-
+    //advertising on a specific channel 
+    struct bt_le_adv_param adv_param = BT_LE_ADV_PARAM(BT_LE_ADV_OPT_USE_IDENTITY,
+                                                 BT_GAP_ADV_FAST_INT_MIN_2,
+                                                 BT_GAP_ADV_FAST_INT_MAX_2,
+                                                 NULL);
+    adv_param.channel_map = BIT(39 - 37); 
     /* Start advertising */
     err =
-        bt_le_adv_start(BT_LE_ADV_NCONN_IDENTITY, ad, ARRAY_SIZE(ad), NULL, 0);
+        bt_le_adv_start(&adv_param, ad, ARRAY_SIZE(ad), NULL, 0);
     if (err) {
       printk("Broadcaster advertising failed to start (err %d)\n", err);
       return 0;
